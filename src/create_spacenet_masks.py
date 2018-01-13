@@ -15,12 +15,9 @@ import pandas as pd
 
 # add apls path and import apls_tools
 # https://github.com/CosmiQ/apls/tree/master/src
-#path_apls_src = '/Users/avanetten/Documents/cosmiq/apls/apls/src'
-#path_apls_src = '/raid/local/src/apls/apls/src'
 path_apls_src = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(path_apls_src)
 import apls_tools
-#reload(apls_tools)
 
 
 ###############################################################################
@@ -166,11 +163,6 @@ def main():
     args = parser.parse_args()
     
     output_df_file = args.output_df_path
-    #data_root = 'AOI' + args.path_data.split('AOI')[-1].replace('/', '_')
-    #output_df_file = os.path.join(args.output_df_path, data_root + '_' \
-    #                              + 'files_loc_' \
-    #                              + str(args.buffer_meters) + 'm.csv')
-    
     path_masks = create_masks(args.path_data, 
                               buffer_meters=args.buffer_meters, 
                               n_bands=args.n_bands,
@@ -186,37 +178,3 @@ def main():
 if __name__ == "__main__":
     main()
     
-'''
-
-##########
-# local
-python /Users/avanetten/Documents/cosmiq/sivnet/src/create_spacenet_masks.py \
-    --path_data=/Users/avanetten/Documents/cosmiq/apls/apls/sample_data/AOI_2_Vegas_Train \
-    --output_df_path=/Users/avanetten/Documents/cosmiq/apls/apls/sample_data/AOI_2_Vegas_Train \
-    --n_bands=8 \
-    --overwrite_ims=1
-# old
-#python /Users/avanetten/Documents/cosmiq/apls/apls/src/create_spacenet_masks.py \
-
-##########
-# dev box
-
-scp -r /Users/avanetten/Documents/cosmiq/sivnet/src 10.123.0.100:/raid/local/src/sivnet/
-
-python /raid/local/src/basiss/src/create_spacenet_masks.py \
-    --path_data=/raid/data/ave/spacenet/data/spacenetv2/AOI_2_Vegas_Train/400m \
-    --output_df_path=/raid/local/src/basiss/packaged_data \
-    --buffer_meters=2 \
-    --n_bands=3 \
-    --make_plots=0 \
-    --overwrite_ims 0
-    
-# Total data length: 989
-# Time to run create_masks(): 33.8357419968 seconds
-
-
-# old
-#scp -r /Users/avanetten/Documents/cosmiq/apls/apls/src 10.123.0.100:/raid/local/src/apls/apls
-#python /raid/local/src/apls/apls/src/create_spacenet_masks.py \
-
-'''

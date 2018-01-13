@@ -604,7 +604,7 @@ def main():
     
     # construct the argument parse and parse the arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path', type=str, default='/raid/local/src/siv_net/',
+    parser.add_argument('--path', type=str, default='/raid/local/src/basiss/',
                         help="path to package")
     parser.add_argument('--mode', type=str, default='test',
                         help="test or train")
@@ -615,7 +615,7 @@ def main():
     parser.add_argument('--prefix', type=str, default='',
                         help="Naming prefix")
     parser.add_argument('--loss', type=str, default='binary_crossentropy',
-                        help="Model loss function [dice, binary_crossentropy]")
+                        help="Model loss function [binary_crossentropy]")
     parser.add_argument('--optimizer', type=str, default='SGD',
                         help="Model optimizer [SGD, ADAM, ADAGRAD]")
     parser.add_argument('--epochs', type=int, default=20,
@@ -627,7 +627,7 @@ def main():
     parser.add_argument('--n_bands', type=int, default=3,
                         help="Number of input bands [3, 8]")    
     parser.add_argument('--n_classes', type=int, default=2,
-                        help="Number of classes [background, building]")   
+                        help="Number of classes [background, road]")
     parser.add_argument('--file_list', type=str, default='',
                         help=".txt file holding list of image IDs")
     parser.add_argument('--validation_split', type=float, default=0.1,
@@ -899,12 +899,3 @@ def main():
                 
 if __name__ == '__main__':
     main()
-    
-    
-'''
-scp -r /Users/avanetten/Documents/cosmiq/basiss/src 10.123.0.100:/raid/local/src/basiss/
-
-# copy back
-scp -r 10.123.0.100://raid/local/src/basiss/results/vegas_400m_unet_3band_8bit_1.5m_slice400_aug_test* /Users/avanetten/Documents/cosmiq/basiss/results
-vegas_400m_unet_3band_8bit_1.5m_slice400_aug
-'''

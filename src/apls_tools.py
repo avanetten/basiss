@@ -4,6 +4,8 @@
 Created on Wed Dec  6 13:32:20 2017
 
 @author: avanetten
+
+copied from https://github.com/CosmiQ/apls/tree/master/src
 """
 
 from __future__ import print_function
