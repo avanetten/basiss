@@ -1,0 +1,59 @@
+# Commands to run basiss.py
+
+# run in the bassis docker container
+# create container
+	nvidia-docker build -t basiss path_to_basiss/docker
+# load container
+	nvidia-docker run -it -v /raid:/raid --name bassiss_train basiss
+
+##########################################################################
+# Training
+##########################################################################
+
+# train Las Vegas SpaceNet 3-band data with unet, and sliced into 400 
+#  	pixel cutouts
+basiss_path=/raid/local/src/basiss
+outname=AOI_2_Vegas_unet_2m_train
+cd $basiss_path
+nohup python -u src/basiss.py \
+	--path $basiss_path \
+	--model unet \
+	--mode train \
+	--file_list AOI_2_Train_2m_file_locs.csv \
+	--slice_x 400 --slice_y 400 \
+	--stride_x 300 --stride_y 300 \
+	--n_bands 3 \
+	--n_classes 2 \
+	--batchsize 32 \
+	--validation_split 0.1 \
+	--early_stopping_patience 4 \
+	--epochs 128 \
+	--gpu 0 \
+	--prefix $outname > \
+		results/$outname.log & tail -f results/$outname.log
+
+
+##########################################################################
+# Testing
+##########################################################################
+
+# test Las Vegas SpaceNet 3-band data with unet, and sliced into 400 
+#  	pixel cutouts
+basiss_path=/raid/local/src/basiss
+outname=AOI_2_Vegas_unet_2m_test
+cd $basiss_path
+nohup python -u src/basiss.py \
+	--path $basiss_path \
+	--model unet \
+	--mode test \
+	--file_list massive_file_list.csv \
+	--model_weights AOI_2_Vegas_unet_2m_train_model_best.hdf5 \
+	--slice_x 400 --slice_y 400 \
+	--stride_x 300 --stride_y 300 \
+	--n_bands 3 \
+	--n_classes 2 \
+	--batchsize 16 \
+	--gpu 3 \
+	--prefix $outname > \
+			results/$outname.log & tail -f results/$outname.log
+
