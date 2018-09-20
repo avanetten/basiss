@@ -5,7 +5,7 @@ Broad Area Satellite Imagery Semantic Segmentation
 
 Code Overview
 
-This package segments satellite imagery over large swaths of land (or sea).  The included examples use [SpaceNet](https://spacenetchallenge.github.io/) labels to identify roads in high resolution satellite imagery.  Access to a GPU is required for training, though inference will function (slowly) on a CPU.  See our [blog post[(https://medium.com/the-downlinq/broad-area-satellite-imagery-semantic-segmentation-basiss-4a7ea2c8466f) for further details.
+This package segments satellite imagery over large swaths of land (or sea).  The included examples use [SpaceNet](https://spacenetchallenge.github.io/) labels to identify roads in high resolution satellite imagery.  Access to a GPU is required for training, though inference will function (slowly) on a CPU.  See our [blog post](https://medium.com/the-downlinq/broad-area-satellite-imagery-semantic-segmentation-basiss-4a7ea2c8466f) for further details.
 
 ==============================================================================
 
